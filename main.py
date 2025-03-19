@@ -32,7 +32,7 @@ def crear_vehiculo():
 
     if ruedas == 2:
         tipo = input("Ingrese el tipo de bicicleta: ")
-        es_motocicleta = input("¿Es una motocicleta? (s/n): ").lower() == 's'
+        es_motocicleta = input("¿Es una motocicleta? (s/n): ").lower() == 'si'
         if es_motocicleta:
             velocidad = int(input("Ingrese la velocidad: "))
             cilindrada = int(input("Ingrese la cilindrada: "))
@@ -42,15 +42,22 @@ def crear_vehiculo():
     else:
         velocidad = int(input("Ingrese la velocidad: "))
         cilindrada = int(input("Ingrese la cilindrada: "))
-        es_camioneta = input("¿Es una camioneta? (s/n): ").lower() == 's'
+        es_camioneta = input("¿Es una camioneta? (s/n): ").lower() == 'si'
         if es_camioneta:
             carga = int(input("Ingrese la carga: "))
             return Camioneta(ruedas, color, velocidad, cilindrada, carga)
         else:
             return Coche(ruedas, color, velocidad, cilindrada)
         
-def catalogar(vehiculos):
-    for vehiculo in vehiculos:
+def catalogar(vehiculos, ruedas=None):
+    if ruedas is not None:
+        vehiculos_filtrados = [v for v in vehiculos if v.ruedas == ruedas]
+        print(f"Se han encontrado {len(vehiculos_filtrados)} vehículos con {ruedas} ruedas:")
+        vehiculos_a_mostrar = vehiculos_filtrados
+    else:
+        vehiculos_a_mostrar = vehiculos
+
+    for vehiculo in vehiculos_a_mostrar:
         print(f"Clase: {vehiculo.__class__.__name__}")
         for atributo, valor in vehiculo.__dict__.items():
             print(f"{atributo}: {valor}")
@@ -61,7 +68,10 @@ while True:
     vehiculo = crear_vehiculo()
     vehiculos.append(vehiculo)
     continuar = input("¿Desea agregar otro vehículo? (s/n): ").lower()
-    if continuar != 's':
+    if continuar != 'si':
         break
 
-catalogar(vehiculos)
+
+
+
+
