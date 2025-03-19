@@ -69,6 +69,12 @@ while True:
     vehiculos.append(vehiculo)
     continuar = input("¿Desea agregar otro vehículo? (s/n): ").lower()
     if continuar != 'si':
+        ruedas = input("¿Desea filtrar por número de ruedas? (s/n): ").lower()
+        if ruedas == 'si':
+            ruedas = int(input("Ingrese el número de ruedas para filtrar: "))
+            catalogar(vehiculos, ruedas)
+        else:
+            catalogar(vehiculos)
         break
 
 
