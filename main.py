@@ -76,8 +76,3 @@ while True:
         else:
             catalogar(vehiculos)
         break
-
-
-
-
-
